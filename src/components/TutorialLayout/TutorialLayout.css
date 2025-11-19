@@ -1,0 +1,29 @@
+.tutorial-layout {
+  display: flex;
+  min-height: calc(100vh - 70px);
+  background: #f8fafc;
+}
+
+.tutorial-content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.tutorial-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .tutorial-content {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tutorial-content {
+    padding: 1rem;
+  }
+}

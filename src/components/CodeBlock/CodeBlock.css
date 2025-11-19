@@ -1,0 +1,95 @@
+.code-block-container {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: #1e1e1e;
+  border-bottom: 1px solid #3e3e3e;
+}
+
+.code-block-title {
+  color: #d4d4d4;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: #2d2d2d;
+  color: #d4d4d4;
+  border: 1px solid #3e3e3e;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-button:hover {
+  background: #3e3e3e;
+  border-color: #4e4e4e;
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+.copy-button-floating {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #2d2d2d;
+  color: #d4d4d4;
+  border: 1px solid #3e3e3e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0.7;
+}
+
+.copy-button-floating:hover {
+  opacity: 1;
+  background: #3e3e3e;
+  border-color: #4e4e4e;
+}
+
+.copy-button-floating:active {
+  transform: scale(0.95);
+}
+
+/* 代码高亮样式优化 */
+.code-block-container pre {
+  margin: 0 !important;
+}
+
+.code-block-container code {
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+}
+
+/* 行号样式 */
+.code-block-container .linenumber {
+  color: #858585 !important;
+  min-width: 2.5em !important;
+  padding-right: 1em !important;
+  text-align: right !important;
+  user-select: none;
+}

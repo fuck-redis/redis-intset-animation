@@ -1,0 +1,42 @@
+.source-code-layout {
+  display: flex;
+  min-height: calc(100vh - 70px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.source-content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 3rem 2rem;
+}
+
+.source-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .source-content-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .source-content {
+    padding: 1.5rem;
+  }
+}

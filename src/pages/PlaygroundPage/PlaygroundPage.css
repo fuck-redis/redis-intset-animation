@@ -1,0 +1,57 @@
+.demo-page {
+  height: calc(100vh - 70px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.demo-header {
+  text-align: center;
+  padding: 0.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.demo-header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.demo-header p {
+  font-size: 0.85rem;
+  color: #4a5568;
+  margin: 0;
+  display: inline-block;
+}
+
+.demo-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.demo-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .demo-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .demo-header p {
+    font-size: 0.875rem;
+    display: block;
+    margin-top: 0.25rem;
+  }
+}

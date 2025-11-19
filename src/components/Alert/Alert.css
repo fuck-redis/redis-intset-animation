@@ -1,0 +1,137 @@
+.alert {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  border-left: 4px solid;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+}
+
+.alert:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.2rem;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+.alert-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: inherit;
+}
+
+.alert-body p {
+  margin: 0;
+}
+
+.alert-body strong {
+  font-weight: 600;
+}
+
+/* Info Alert (默认蓝色) */
+.alert-info {
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+  border-left-color: #3b82f6;
+  color: #1e40af;
+}
+
+.alert-info .alert-icon {
+  color: #3b82f6;
+}
+
+.alert-info .alert-title {
+  color: #1e40af;
+}
+
+/* Warning Alert (黄色) */
+.alert-warning {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
+  border-left-color: #f59e0b;
+  color: #92400e;
+}
+
+.alert-warning .alert-icon {
+  color: #f59e0b;
+}
+
+.alert-warning .alert-title {
+  color: #92400e;
+}
+
+/* Success Alert (绿色) */
+.alert-success {
+  background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+  border-left-color: #10b981;
+  color: #166534;
+}
+
+.alert-success .alert-icon {
+  color: #10b981;
+}
+
+.alert-success .alert-title {
+  color: #166534;
+}
+
+/* Tip Alert (紫色) */
+.alert-tip {
+  background: linear-gradient(135deg, #e9d5ff 0%, #f3e8ff 100%);
+  border-left-color: #10b981;
+  color: #6b21a8;
+}
+
+.alert-tip .alert-icon {
+  color: #10b981;
+}
+
+.alert-tip .alert-title {
+  color: #6b21a8;
+}
+
+/* 代码在Alert中的样式 */
+.alert code {
+  background: rgba(0, 0, 0, 0.08);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.alert-warning code {
+  background: rgba(245, 158, 11, 0.15);
+  color: #92400e;
+}
+
+.alert-info code {
+  background: rgba(59, 130, 246, 0.15);
+  color: #1e40af;
+}
+
+.alert-success code {
+  background: rgba(16, 185, 129, 0.15);
+  color: #166534;
+}
+
+.alert-tip code {
+  background: rgba(168, 85, 247, 0.15);
+  color: #6b21a8;
+}

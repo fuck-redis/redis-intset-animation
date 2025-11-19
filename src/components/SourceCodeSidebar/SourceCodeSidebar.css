@@ -1,0 +1,121 @@
+.source-sidebar {
+  width: 300px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  padding: 2rem 0;
+  overflow-y: auto;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 70px);
+}
+
+.sidebar-header {
+  padding: 0 1.5rem 2rem 1.5rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+}
+
+.sidebar-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #60a5fa;
+  margin: 0 0 0.5rem 0;
+}
+
+.sidebar-subtitle {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.sidebar-nav {
+  padding: 1rem 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  text-decoration: none;
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.sidebar-link:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border-left-color: #3b82f6;
+}
+
+.sidebar-link.active {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-left-color: #60a5fa;
+  font-weight: 600;
+}
+
+.sidebar-link.active::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: #60a5fa;
+  border-radius: 4px 0 0 4px;
+}
+
+.chapter-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-link.active .chapter-number {
+  background: rgba(96, 165, 250, 0.3);
+  color: #60a5fa;
+}
+
+.chapter-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chapter-title {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1024px) {
+  .source-sidebar {
+    width: 250px;
+  }
+
+  .chapter-title {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .source-sidebar {
+    position: fixed;
+    left: -300px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .source-sidebar.open {
+    left: 0;
+  }
+}

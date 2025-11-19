@@ -1,0 +1,229 @@
+.animation-controls {
+  padding: 1rem 2rem;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.animation-controls-bottom .animation-controls {
+  border-radius: 0;
+}
+
+.controls-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.step-indicator {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+}
+
+.animation-controls.speed-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 300px;
+}
+
+.controls-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-btn:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  background: var(--bg-tertiary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.control-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.control-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.play-btn {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--success-color) 0%, #22c55e 100%);
+  border-color: var(--success-color);
+  color: white;
+}
+
+.play-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #22c55e 0%, var(--success-color) 100%);
+  border-color: #22c55e;
+}
+
+.pause-btn {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--warning-color) 0%, #fbbf24 100%);
+  border-color: var(--warning-color);
+  color: white;
+}
+
+.pause-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #fbbf24 0%, var(--warning-color) 100%);
+  border-color: #fbbf24;
+}
+
+.reset-btn {
+  color: var(--primary-color);
+}
+
+.reset-btn:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: white;
+}
+
+.speed-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.speed-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.speed-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.speed-mark {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.speed-slider {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.speed-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--success-color);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.speed-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: var(--shadow-md);
+}
+
+.speed-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--success-color);
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.speed-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: var(--shadow-md);
+}
+
+.speed-value {
+  text-align: center;
+  font-weight: 600;
+  color: var(--success-color);
+  font-size: 0.875rem;
+}
+
+.progress-bar-container {
+  display: none;
+  background: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .controls-buttons {
+    flex-wrap: wrap;
+  }
+
+  .control-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .play-btn,
+  .pause-btn {
+    width: 44px;
+    height: 44px;
+  }
+}

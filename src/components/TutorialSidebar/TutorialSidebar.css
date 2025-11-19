@@ -1,0 +1,129 @@
+.tutorial-sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  position: sticky;
+  top: 70px;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.sidebar-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  color: #4a5568;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.sidebar-link:hover {
+  background: #f7fafc;
+  color: #0ea5e9;
+}
+
+.sidebar-link.active {
+  background: #e0f2fe;
+  color: #0284c7;
+  border-left-color: #0ea5e9;
+  font-weight: 600;
+}
+
+.chapter-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.sidebar-link.active .chapter-number {
+  background: #0ea5e9;
+  color: white;
+}
+
+.chapter-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chapter-title {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+/* Scrollbar styling */
+.tutorial-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tutorial-sidebar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.tutorial-sidebar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.tutorial-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .tutorial-sidebar {
+    width: 240px;
+  }
+  
+  .sidebar-link {
+    padding: 0.75rem 1rem;
+  }
+  
+  .chapter-title {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tutorial-sidebar {
+    position: fixed;
+    left: -280px;
+    z-index: 100;
+    transition: left 0.3s;
+  }
+  
+  .tutorial-sidebar.open {
+    left: 0;
+  }
+}
