@@ -1,57 +1,55 @@
-.demo-page {
+.playground-page {
   height: calc(100vh - 70px);
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(140deg, #f8fbff 0%, #e2f3ff 100%);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.demo-header {
-  text-align: center;
-  padding: 0.5rem 1.5rem;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
-}
-
-.demo-header h1 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-  display: inline-block;
-  margin-right: 1rem;
-}
-
-.demo-header p {
-  font-size: 0.85rem;
-  color: #4a5568;
-  margin: 0;
-  display: inline-block;
-}
-
-.demo-content {
+.playground-content {
   flex: 1;
   display: flex;
   overflow: hidden;
-  position: relative;
 }
 
-.demo-main {
-  flex: 1;
+.idea-modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 1200;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .demo-header h1 {
-    font-size: 1.5rem;
-  }
+.idea-modal {
+  width: min(560px, 92vw);
+  background: white;
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.2);
+}
 
-  .demo-header p {
-    font-size: 0.875rem;
-    display: block;
-    margin-top: 0.25rem;
-  }
+.idea-modal h3 {
+  margin: 0 0 0.5rem;
+  color: #0f172a;
+  font-size: 1rem;
+}
+
+.idea-modal ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #334155;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.idea-modal button {
+  margin-top: 0.75rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  border-radius: 4px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
 }

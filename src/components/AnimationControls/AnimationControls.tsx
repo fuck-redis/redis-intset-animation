@@ -1,13 +1,5 @@
-import React from 'react';
-import { 
-  Play, 
-  Pause, 
-  SkipBack, 
-  SkipForward,
-  StepBack,
-  StepForward,
-  RotateCcw,
-} from 'lucide-react';
+import React, { useMemo, useRef } from 'react';
+import { Pause, Play, RotateCcw, SkipBack, SkipForward, StepBack, StepForward } from 'lucide-react';
 import './AnimationControls.css';
 
 interface AnimationControlsProps {
@@ -23,9 +15,12 @@ interface AnimationControlsProps {
   onStepForward: () => void;
   onStepBackward: () => void;
   onSpeedChange: (speed: number) => void;
+  onSeekToStep: (step: number) => void;
   canStepForward: boolean;
   canStepBackward: boolean;
 }
+
+const SPEED_OPTIONS = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
 const AnimationControls: React.FC<AnimationControlsProps> = ({
   isPlaying,
@@ -40,138 +35,147 @@ const AnimationControls: React.FC<AnimationControlsProps> = ({
   onStepForward,
   onStepBackward,
   onSpeedChange,
+  onSeekToStep,
   canStepForward,
   canStepBackward,
 }) => {
+  const progress = useMemo(() => {
+    if (totalSteps === 0) return 0;
+    return (currentStep / totalSteps) * 100;
+  }, [currentStep, totalSteps]);
+
+  const dragRef = useRef<HTMLDivElement>(null);
+
+  const seekByClientX = (clientX: number) => {
+    if (!dragRef.current || totalSteps === 0) return;
+    const rect = dragRef.current.getBoundingClientRect();
+    const ratio = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+    const targetStep = Math.round(ratio * totalSteps);
+    onSeekToStep(targetStep);
+  };
+
+  const beginPointerDrag = (pointerId: number) => {
+    const track = dragRef.current;
+    if (!track) return;
+    track.setPointerCapture(pointerId);
+
+    const onMove = (event: PointerEvent) => seekByClientX(event.clientX);
+    const onUp = () => {
+      track.releasePointerCapture(pointerId);
+      track.removeEventListener('pointermove', onMove);
+      track.removeEventListener('pointerup', onUp);
+      track.removeEventListener('pointercancel', onUp);
+    };
+
+    track.addEventListener('pointermove', onMove);
+    track.addEventListener('pointerup', onUp);
+    track.addEventListener('pointercancel', onUp);
+  };
+
+  const handleProgressPointerDown: React.PointerEventHandler<HTMLDivElement> = (event) => {
+    event.preventDefault();
+    seekByClientX(event.clientX);
+    beginPointerDrag(event.pointerId);
+  };
+
+  const handlePlayControl = () => {
+    if (!isPlaying) {
+      onPlay();
+      return;
+    }
+
+    if (isPaused) {
+      onResume();
+      return;
+    }
+
+    onPause();
+  };
+
   return (
     <div className="animation-controls">
-      <div className="controls-header">
-        <h4 className="controls-title">动画控制</h4>
-        {totalSteps > 0 && (
+      <div className="controls-main">
+        <div className="controls-left">
+          <h4 className="controls-title">分步播放控制</h4>
           <div className="step-indicator">
-            步骤 {currentStep}/{totalSteps}
+            {currentStep}/{totalSteps}
           </div>
-        )}
-      </div>
+        </div>
 
-      <div className="controls-buttons">
-        {/* 重置按钮 */}
-        <button
-          className="control-btn reset-btn"
-          onClick={onReset}
-          disabled={totalSteps === 0 || (currentStep === 0 && !isPlaying)}
-          title="重置动画"
-        >
-          <RotateCcw size={18} />
-        </button>
+        <div className="controls-buttons">
+          <button className="control-btn" onClick={onStepBackward} disabled={!canStepBackward} title="上一步（←）">
+            <StepBack size={16} />
+            <span>上一步 (←)</span>
+          </button>
 
-        {/* 后退一步 */}
-        <button
-          className="control-btn"
-          onClick={onStepBackward}
-          disabled={!canStepBackward}
-          title="后退一步"
-        >
-          <StepBack size={18} />
-        </button>
+          <button className="control-btn" onClick={() => onSeekToStep(0)} disabled={!canStepBackward} title="回到起点">
+            <SkipBack size={16} />
+            <span>起点</span>
+          </button>
 
-        {/* 快退到开始 */}
-        <button
-          className="control-btn"
-          onClick={onReset}
-          disabled={!canStepBackward}
-          title="回到开始"
-        >
-          <SkipBack size={18} />
-        </button>
-
-        {/* 播放/暂停/继续 */}
-        {!isPlaying ? (
           <button
-            className="control-btn play-btn"
-            onClick={onPlay}
+            className={`control-btn primary ${isPlaying && !isPaused ? 'pause' : ''}`}
+            onClick={handlePlayControl}
             disabled={totalSteps === 0}
-            title="播放动画"
+            title="播放/暂停（Space）"
           >
-            <Play size={20} />
+            {isPlaying && !isPaused ? <Pause size={16} /> : <Play size={16} />}
+            <span>{isPlaying && !isPaused ? '暂停 (Space)' : '播放 (Space)'}</span>
           </button>
-        ) : isPaused ? (
-          <button
-            className="control-btn play-btn"
-            onClick={onResume}
-            title="继续播放"
-          >
-            <Play size={20} />
-          </button>
-        ) : (
-          <button
-            className="control-btn pause-btn"
-            onClick={onPause}
-            title="暂停播放"
-          >
-            <Pause size={20} />
-          </button>
-        )}
 
-        {/* 快进到结束 */}
-        <button
-          className="control-btn"
-          onClick={() => {
-            // 跳到最后一步
-            while (canStepForward) {
-              onStepForward();
-            }
-          }}
-          disabled={!canStepForward}
-          title="快进到结束"
-        >
-          <SkipForward size={18} />
-        </button>
+          <button className="control-btn" onClick={() => onSeekToStep(totalSteps)} disabled={!canStepForward} title="跳到终点">
+            <SkipForward size={16} />
+            <span>终点</span>
+          </button>
 
-        {/* 前进一步 */}
-        <button
-          className="control-btn"
-          onClick={onStepForward}
-          disabled={!canStepForward}
-          title="前进一步"
-        >
-          <StepForward size={18} />
-        </button>
+          <button className="control-btn" onClick={onStepForward} disabled={!canStepForward} title="下一步（→）">
+            <StepForward size={16} />
+            <span>下一步 (→)</span>
+          </button>
+
+          <button className="control-btn" onClick={onReset} disabled={totalSteps === 0} title="重置（R）">
+            <RotateCcw size={16} />
+            <span>重置 (R)</span>
+          </button>
+        </div>
+
+        <div className="speed-group">
+          {SPEED_OPTIONS.map((speed) => (
+            <button
+              key={speed}
+              type="button"
+              className={`speed-chip ${animationSpeed === speed ? 'active' : ''}`}
+              onClick={() => onSpeedChange(speed)}
+            >
+              {speed.toFixed(speed % 1 === 0 ? 0 : 2)}x
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* 速度控制 */}
-      <div className="speed-control">
-        <label className="speed-label">播放速度</label>
-        <div className="speed-slider-container">
-          <span className="speed-mark">0.5x</span>
-          <input
-            type="range"
-            min="0.5"
-            max="2"
-            step="0.1"
-            value={animationSpeed}
-            onChange={e => onSpeedChange(parseFloat(e.target.value))}
-            className="speed-slider"
-          />
-          <span className="speed-mark">2.0x</span>
-        </div>
-        <div className="speed-value">{animationSpeed.toFixed(1)}x</div>
-      </div>
+      <div className="progress-wrapper">
+        <div
+          className="progress-track"
+          ref={dragRef}
+          onPointerDown={handleProgressPointerDown}
+          role="slider"
+          aria-valuemin={0}
+          aria-valuemax={totalSteps}
+          aria-valuenow={currentStep}
+          tabIndex={0}
+        >
+          <div className="progress-fill" style={{ width: `${progress}%` }} />
+          <div className="progress-thumb" style={{ left: `${progress}%` }} />
 
-      {/* 进度条 */}
-      {totalSteps > 0 && (
-        <div className="progress-bar-container">
-          <div className="progress-bar">
-            <div 
-              className="progress-fill"
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            />
-          </div>
-          <div className="progress-text">
-            {Math.round((currentStep / totalSteps) * 100)}% 完成
-          </div>
+          {totalSteps > 1 && (
+            <div className="progress-ticks">
+              {Array.from({ length: totalSteps + 1 }, (_, index) => (
+                <span key={index} className="tick" />
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

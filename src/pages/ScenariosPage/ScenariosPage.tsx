@@ -1,8 +1,68 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, ChevronRight } from 'lucide-react';
+import { Play, ChevronRight, Video } from 'lucide-react';
 import { LearningScenario } from '../../types/intset';
+import { VideoModal, type VideoConfig } from '../../components/VideoModal/VideoModal';
+import VideoEmbed from '../../components/VideoEmbed';
+import {
+  BinarySearchVideo,
+  EncodingUpgradeVideo,
+  InsertOperationVideo,
+  DeleteOperationVideo,
+} from '../../videos';
 import './ScenariosPage.css';
+
+const SCENARIO_VIDEOS: Record<string, VideoConfig> = {
+  '基础操作演示': {
+    id: 'scenario-basic',
+    title: '插入与查找操作',
+    description: '演示基本的插入和查找操作',
+    component: InsertOperationVideo,
+    props: { operation: 'insert', value: 25, initialData: [10, 20, 30] },
+  },
+  '编码升级 - INT16到INT32': {
+    id: 'scenario-upgrade-int16',
+    title: '编码升级 INT16→INT32',
+    description: '插入超出INT16范围的值，触发升级',
+    component: EncodingUpgradeVideo,
+    props: { initialEncoding: 'INT16', triggerValue: 40000 },
+  },
+  '编码升级 - 负数溢出': {
+    id: 'scenario-upgrade-negative',
+    title: '编码升级 负数溢出',
+    description: '插入负数触发编码升级',
+    component: EncodingUpgradeVideo,
+    props: { initialEncoding: 'INT16', triggerValue: -40000 },
+  },
+  '批量插入场景': {
+    id: 'scenario-batch',
+    title: '批量插入',
+    description: '一次性插入多个元素的演示',
+    component: InsertOperationVideo,
+    props: { operation: 'insert', value: 35, initialData: [5, 15, 25] },
+  },
+  '二分查找演示': {
+    id: 'scenario-binary-search',
+    title: '二分查找算法',
+    description: '在大型集合中查找元素',
+    component: BinarySearchVideo,
+    props: { searchValue: 70, data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] },
+  },
+  '删除操作演示': {
+    id: 'scenario-delete',
+    title: '删除操作',
+    description: '删除元素并观察内存变化',
+    component: DeleteOperationVideo,
+    props: { operation: 'delete', value: 15, initialData: [5, 10, 15, 20, 25] },
+  },
+  '连续升级场景': {
+    id: 'scenario-continuous-upgrade',
+    title: '连续编码升级',
+    description: '体验完整的编码升级链 INT16→INT32→INT64',
+    component: EncodingUpgradeVideo,
+    props: { initialEncoding: 'INT16', triggerValue: 10000000000 },
+  },
+};
 
 const LEARNING_SCENARIOS: (LearningScenario & { difficulty: string; learningGoals: string[] })[] = [
   {
@@ -119,6 +179,7 @@ const LEARNING_SCENARIOS: (LearningScenario & { difficulty: string; learningGoal
 const ScenariosPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedScenario, setSelectedScenario] = useState<number | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<VideoConfig | null>(null);
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -163,6 +224,30 @@ const ScenariosPage: React.FC = () => {
                 <p>使用动画控制观察每个步骤的执行过程</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Featured Animation Demo */}
+        <div className="featured-demo">
+          <h2>动画演示</h2>
+          <p className="featured-demo-subtitle">通过动画深入理解 IntSet 的工作原理</p>
+          <div className="featured-video-grid">
+            <VideoEmbed
+              title="编码升级演示"
+              description="插入大值时触发 INT16 → INT32 → INT64 升级"
+              component={EncodingUpgradeVideo}
+              props={{ initialEncoding: 'INT16', triggerValue: 100000 }}
+              autoplay={true}
+              aspectRatio="16:9"
+            />
+            <VideoEmbed
+              title="二分查找演示"
+              description="O(log n) 时间复杂度的查找过程"
+              component={BinarySearchVideo}
+              props={{ searchValue: 50, data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] }}
+              autoplay={true}
+              aspectRatio="16:9"
+            />
           </div>
         </div>
 
@@ -215,16 +300,29 @@ const ScenariosPage: React.FC = () => {
                 </div>
               )}
 
-              <button 
+              <button
                 className="run-scenario-btn"
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate('/playground');
+                  navigate('/playground', { state: { scenario } });
                 }}
               >
                 <Play size={18} />
                 运行场景
               </button>
+
+              {SCENARIO_VIDEOS[scenario.name] && (
+                <button
+                  className="video-scenario-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedVideo(SCENARIO_VIDEOS[scenario.name]);
+                  }}
+                >
+                  <Video size={18} />
+                  视频演示
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -239,6 +337,8 @@ const ScenariosPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <VideoModal video={selectedVideo} onClose={() => setSelectedVideo(null)} />
     </div>
   );
 };

@@ -1,0 +1,65 @@
+.code-debugger {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.code-debugger-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.code-debugger-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.language-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.language-tab {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-tab.active {
+  background: #0ea5e9;
+  color: white;
+  border-color: #0284c7;
+}
+
+.debug-code-line {
+  position: relative;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.debug-code-line.is-active {
+  background: rgba(34, 197, 94, 0.18);
+  border-left-color: #22c55e;
+}
+
+.debug-code-line[data-debug]:not([data-debug=''])::after {
+  content: attr(data-debug);
+  color: #a7f3d0;
+  font-size: 11px;
+  margin-left: 10px;
+  opacity: 0.95;
+}

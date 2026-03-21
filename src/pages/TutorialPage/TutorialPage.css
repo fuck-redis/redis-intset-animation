@@ -32,10 +32,10 @@
 
 .collapsible-section {
   background: white;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .section-header {
@@ -43,12 +43,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
   color: white;
   border: none;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .section-header:hover {
@@ -174,9 +174,9 @@
 }
 
 .encoding-card {
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .encoding-card h4 {
@@ -241,10 +241,10 @@
 }
 
 .flow-box {
-  padding: 1rem 2rem;
-  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
   text-align: center;
-  min-width: 150px;
+  min-width: 120px;
   font-weight: 700;
 }
 
@@ -484,11 +484,11 @@
 
 .tutorial-footer {
   background: white;
-  border-radius: 16px;
-  padding: 3rem;
-  margin-top: 3rem;
+  border-radius: 6px;
+  padding: 2rem;
+  margin-top: 2rem;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .next-steps h3 {
@@ -512,15 +512,15 @@
 }
 
 .next-btn {
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .next-btn:hover {
@@ -557,4 +557,47 @@
   .next-buttons {
     flex-direction: column;
   }
+}
+
+.video-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 12px;
+  border: 1px solid #334155;
+}
+
+.video-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.video-section-header svg {
+  color: #3b82f6;
+}
+
+.video-play-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.video-play-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
 }

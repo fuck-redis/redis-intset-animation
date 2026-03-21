@@ -1,0 +1,83 @@
+.video-card {
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #334155;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.video-card-thumbnail {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-card-play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.video-card:hover .video-card-play-btn {
+  transform: scale(1.1);
+  background: rgba(59, 130, 246, 1);
+}
+
+.video-card-play-btn svg {
+  color: white;
+  margin-left: 4px;
+}
+
+.video-card-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.video-card-content {
+  padding: 16px;
+}
+
+.video-card-title {
+  color: #f8fafc;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.video-card-description {
+  color: #94a3b8;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.video-card-tag {
+  display: inline-block;
+  background: #334155;
+  color: #94a3b8;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-top: 8px;
+}

@@ -1,229 +1,167 @@
 .animation-controls {
-  padding: 1rem 2rem;
-  background: white;
+  padding: 0.7rem 1rem 0.85rem;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.55rem;
+  background: #ffffff;
 }
 
-.animation-controls-bottom .animation-controls {
-  border-radius: 0;
+.controls-main {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.9rem;
+  align-items: center;
 }
 
-.controls-header {
+.controls-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.55rem;
 }
 
 .controls-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
   margin: 0;
+  font-size: 0.9rem;
+  color: #0f172a;
 }
 
 .step-indicator {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  background: var(--bg-primary);
-  border-radius: var(--radius-sm);
-}
-
-.animation-controls.speed-controls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  min-width: 300px;
+  font-size: 0.7rem;
+  color: #334155;
+  background: #e2e8f0;
+  border-radius: 4px;
+  padding: 0.15rem 0.35rem;
 }
 
 .controls-buttons {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex: 1;
   justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .control-btn {
-  display: flex;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #1e293b;
+  border-radius: 4px;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  gap: 0.2rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
 }
 
 .control-btn:hover:not(:disabled) {
-  border-color: var(--primary-color);
-  background: var(--bg-tertiary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  border-color: #0ea5e9;
+  background: #e0f2fe;
 }
 
-.control-btn:active:not(:disabled) {
-  transform: translateY(0);
+.control-btn.primary {
+  background: #16a34a;
+  border-color: #15803d;
+  color: white;
+}
+
+.control-btn.primary.pause {
+  background: #f59e0b;
+  border-color: #d97706;
 }
 
 .control-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
-.play-btn {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--success-color) 0%, #22c55e 100%);
-  border-color: var(--success-color);
-  color: white;
-}
-
-.play-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #22c55e 0%, var(--success-color) 100%);
-  border-color: #22c55e;
-}
-
-.pause-btn {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--warning-color) 0%, #fbbf24 100%);
-  border-color: var(--warning-color);
-  color: white;
-}
-
-.pause-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #fbbf24 0%, var(--warning-color) 100%);
-  border-color: #fbbf24;
-}
-
-.reset-btn {
-  color: var(--primary-color);
-}
-
-.reset-btn:hover:not(:disabled) {
-  background: var(--primary-color);
-  color: white;
-}
-
-.speed-control {
-  display: flex;
-  flex-direction: row;
+.speed-group {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.28rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
-.speed-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-}
-
-.speed-slider-container {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.speed-mark {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  min-width: 2.5rem;
-  text-align: center;
-}
-
-.speed-slider {
-  flex: 1;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--border-color);
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.speed-slider::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--success-color);
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s;
-}
-
-.speed-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: var(--shadow-md);
-}
-
-.speed-slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--success-color);
-  cursor: pointer;
-  border: none;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s;
-}
-
-.speed-slider::-moz-range-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: var(--shadow-md);
-}
-
-.speed-value {
-  text-align: center;
-  font-weight: 600;
-  color: var(--success-color);
-  font-size: 0.875rem;
-}
-
-.progress-bar-container {
-  display: none;
-  background: var(--border-color);
+.speed-chip {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.7rem;
   border-radius: 4px;
-  overflow: hidden;
+  padding: 0.15rem 0.35rem;
+  cursor: pointer;
+}
+
+.speed-chip.active {
+  background: #0369a1;
+  border-color: #0369a1;
+  color: white;
+}
+
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #cbd5e1;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
 }
 
 .progress-fill {
+  position: absolute;
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  transition: width 0.3s ease;
-  border-radius: 4px;
+  left: 0;
+  top: 0;
+  border-radius: 999px;
+  background: #16a34a;
 }
 
-.progress-text {
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  font-weight: 500;
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #16a34a;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
+  transform: translate(-50%, -50%);
 }
 
-@media (max-width: 768px) {
-  .controls-buttons {
-    flex-wrap: wrap;
+@media (max-width: 1200px) {
+  .controls-main {
+    grid-template-columns: 1fr;
   }
 
-  .control-btn {
-    width: 36px;
-    height: 36px;
+  .speed-group {
+    justify-content: center;
   }
 
-  .play-btn,
-  .pause-btn {
-    width: 44px;
-    height: 44px;
+  .controls-left {
+    justify-content: center;
   }
+}
+
+
+.progress-ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 0 2px;
+}
+
+.tick {
+  width: 1px;
+  height: 8px;
+  background: rgba(30, 41, 59, 0.22);
 }

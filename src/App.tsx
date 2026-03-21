@@ -6,6 +6,7 @@ import SourceCodeLayout from './components/SourceCodeLayout/SourceCodeLayout';
 import HomePage from './pages/HomePage/HomePage';
 import PlaygroundPage from './pages/PlaygroundPage/PlaygroundPage';
 import ScenariosPage from './pages/ScenariosPage/ScenariosPage';
+import VideoGalleryPage from './pages/VideoGalleryPage/VideoGalleryPage';
 
 // Tutorial chapters
 import WhatIsIntSet from './pages/TutorialPage/chapters/WhatIsIntSet';
@@ -52,6 +53,7 @@ const App: React.FC = () => {
           
           <Route path="/playground" element={<PlaygroundPage />} />
           <Route path="/scenarios" element={<ScenariosPage />} />
+          <Route path="/videos" element={<VideoGalleryPage />} />
           
           {/* Source code routes with sidebar */}
           <Route path="/source-code" element={<SourceCodeLayout />}>

@@ -63,3 +63,8 @@ next-env.d.ts
 # Debug
 .vscode/launch.json
 .vscode/settings.json
+
+# Local runtime artifacts
+.pm2/
+.codex-service-port
+output/playwright/

@@ -1,9 +1,10 @@
 .navigation {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #0ea5e9;
+  box-shadow: none;
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -24,15 +25,14 @@
 }
 
 .brand-icon {
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+  border-radius: 4px;
 }
 
 .brand-text h1 {
@@ -60,26 +60,23 @@
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: all 0.2s;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
 }
 
 .nav-link:hover {
   background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
 }
 
 .nav-link.active {
   background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .nav-actions {
@@ -88,21 +85,28 @@
 }
 
 .github-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  gap: 0.4rem;
+  padding: 0 0.75rem;
+  height: 32px;
+  color: #0f172a;
+  background: #f8fafc;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   transition: all 0.2s;
-  backdrop-filter: blur(10px);
 }
 
 .github-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  background: #ffffff;
+}
+
+.github-link span {
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 1024px) {

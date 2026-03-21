@@ -4,7 +4,7 @@ import { Lightbulb, Play, ChevronDown, ChevronUp } from 'lucide-react';
 import './ScenarioPanel.css';
 
 interface ScenarioPanelProps {
-  onExecuteScenario: (scenario: LearningScenario) => void;
+  onExecuteScenario: (scenario: LearningScenario) => Promise<void>;
   isAnimating: boolean;
   collapsible?: boolean;
 }
@@ -130,7 +130,7 @@ const ScenarioPanel: React.FC<ScenarioPanelProps> = ({
                 </div>
                 <button
                   className="scenario-run-btn"
-                  onClick={() => onExecuteScenario(scenario)}
+                  onClick={() => { void onExecuteScenario(scenario); }}
                   disabled={isAnimating}
                   title="运行此场景"
                 >

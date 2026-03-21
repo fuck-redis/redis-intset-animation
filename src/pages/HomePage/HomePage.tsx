@@ -1,21 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  PlayCircle, 
-  BookOpen, 
-  ArrowRight, 
+import {
+  PlayCircle,
+  BookOpen,
+  ArrowRight,
   CheckCircle,
   Eye,
   BookText,
   Film,
   Lightbulb,
   Code2,
-  Zap
+  Zap,
+  Video
 } from 'lucide-react';
+import { VideoModal, type VideoConfig } from '../../components/VideoModal/VideoModal';
+import VideoEmbed from '../../components/VideoEmbed';
+import { EncodingUpgradeVideo, BinarySearchVideo, InsertOperationVideo } from '../../videos';
 import './HomePage.css';
+
+const VIDEO_CONFIGS: VideoConfig[] = [
+  {
+    id: 'encoding-upgrade',
+    title: '编码升级机制',
+    description: '详解 INT16 → INT32 → INT64 的自动升级过程',
+    component: EncodingUpgradeVideo,
+    props: { initialEncoding: 'INT16', triggerValue: 50000 },
+  },
+  {
+    id: 'binary-search',
+    title: '二分查找算法',
+    description: 'O(log n) 时间复杂度的查找过程可视化',
+    component: BinarySearchVideo,
+    props: { searchValue: 42, data: [1, 15, 23, 42, 56, 78, 89, 100] },
+  },
+];
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedVideo, setSelectedVideo] = useState<VideoConfig | null>(null);
 
   return (
     <div className="home-page">
@@ -42,25 +64,14 @@ const HomePage: React.FC = () => {
         </div>
         <div className="hero-visual">
           <div className="visual-card">
-            <div className="encoding-showcase">
-              <div className="encoding-item int16">
-                <span className="encoding-label">INT16</span>
-                <span className="encoding-size">2 Bytes</span>
-                <span className="encoding-range">-32,768 ~ 32,767</span>
-              </div>
-              <div className="arrow-right">↗</div>
-              <div className="encoding-item int32">
-                <span className="encoding-label">INT32</span>
-                <span className="encoding-size">4 Bytes</span>
-                <span className="encoding-range">±2.1B</span>
-              </div>
-              <div className="arrow-right">↗</div>
-              <div className="encoding-item int64">
-                <span className="encoding-label">INT64</span>
-                <span className="encoding-size">8 Bytes</span>
-                <span className="encoding-range">±9.2E+18</span>
-              </div>
-            </div>
+            <VideoEmbed
+              title="编码升级动画演示"
+              description="IntSet 如何自动升级编码以容纳更大的值"
+              component={EncodingUpgradeVideo}
+              props={{ initialEncoding: 'INT16', triggerValue: 50000 }}
+              autoplay={true}
+              aspectRatio="4:3"
+            />
           </div>
         </div>
       </section>
@@ -100,6 +111,33 @@ const HomePage: React.FC = () => {
             <button className="feature-link" onClick={() => navigate('/playground')}>
               查看演示 <ArrowRight size={16} />
             </button>
+          </div>
+
+          <div className="feature-card">
+            <div className="feature-icon">
+              <Video size={48} className="icon" />
+            </div>
+            <h3>Remotion 视频讲解</h3>
+            <p>高质量动画视频讲解核心知识点，可交互播放。编码升级、二分查找等原理一看就懂</p>
+            <button
+              className="feature-link"
+              onClick={() => setSelectedVideo(VIDEO_CONFIGS[0])}
+            >
+              观看视频 <ArrowRight size={16} />
+            </button>
+          </div>
+
+          <div className="feature-card feature-card-video">
+            <div className="feature-video-demo">
+              <VideoEmbed
+                title="二分查找演示"
+                description="O(log n) 时间复杂度的查找过程"
+                component={BinarySearchVideo}
+                props={{ searchValue: 42, data: [1, 15, 23, 42, 56, 78, 89, 100] }}
+                autoplay={true}
+                aspectRatio="4:3"
+              />
+            </div>
           </div>
 
           <div className="feature-card">
@@ -193,6 +231,22 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Animation Demo Section */}
+      <section className="demo-section">
+        <h2 className="section-title">插入操作演示</h2>
+        <p className="demo-description">观察 IntSet 如何执行插入操作：二分查找位置 → 检查编码 → 移动元素 → 写入新值</p>
+        <div className="demo-video-container">
+          <VideoEmbed
+            title="插入操作详解"
+            description="完整演示插入算法的每一步执行过程"
+            component={InsertOperationVideo}
+            props={{ operation: 'insert', value: 35, initialData: [10, 20, 30, 40, 50] }}
+            autoplay={true}
+            aspectRatio="16:9"
+          />
+        </div>
+      </section>
+
       {/* Why IntSet Section */}
       <section className="why-section">
         <div className="why-container">
@@ -249,6 +303,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Video Modal */}
+      <VideoModal video={selectedVideo} onClose={() => setSelectedVideo(null)} />
     </div>
   );
 };

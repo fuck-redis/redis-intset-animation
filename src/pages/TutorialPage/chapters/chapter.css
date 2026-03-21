@@ -1,8 +1,8 @@
 .chapter-content {
   background: white;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 2.5rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .chapter-content h1 {
@@ -18,7 +18,7 @@
   font-size: 1.75rem;
   font-weight: 700;
   color: #1a202c;
-  margin: 2rem 0 1rem 0;
+  margin: 1.5rem 0 0.75rem 0;
 }
 
 .chapter-content h3 {
@@ -29,7 +29,7 @@
 }
 
 .chapter-content section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .chapter-content p {
@@ -107,14 +107,14 @@
 .encoding-card {
   background: #f8fafc;
   padding: 1.5rem;
-  border-radius: 10px;
-  border: 2px solid #e2e8f0;
-  transition: all 0.3s;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
 }
 
 .encoding-card:hover {
   border-color: #0ea5e9;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.1);
 }
 
 .encoding-card h3 {
@@ -143,7 +143,7 @@
 .faq-item {
   background: #f8fafc;
   padding: 1.5rem;
-  border-radius: 12px;
+  border-radius: 6px;
   border-left: 4px solid #0ea5e9;
 }
 

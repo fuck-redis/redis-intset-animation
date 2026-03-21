@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, BookOpen, PlayCircle, Lightbulb, Code, Github } from 'lucide-react';
+import { Home, BookOpen, PlayCircle, Lightbulb, Code, Github, Video } from 'lucide-react';
 import './Navigation.css';
 
 const Navigation: React.FC = () => {
@@ -41,6 +41,12 @@ const Navigation: React.FC = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/videos" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              <Video size={18} />
+              <span>视频中心</span>
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/source-code" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               <Code size={18} />
               <span>源码分析</span>
@@ -49,14 +55,16 @@ const Navigation: React.FC = () => {
         </ul>
 
         <div className="nav-actions">
-          <a 
-            href="https://github.com/redis/redis" 
-            target="_blank" 
+          <a
+            href="https://github.com/fuck-redis/redis-intset-animation"
+            target="_blank"
             rel="noopener noreferrer"
             className="github-link"
-            title="Redis GitHub"
+            title="GitHub 仓库"
+            aria-label="GitHub 仓库"
           >
-            <Github size={20} />
+            <Github size={24} />
+            <span>GitHub</span>
           </a>
         </div>
       </div>

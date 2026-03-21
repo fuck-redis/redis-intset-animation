@@ -1,0 +1,129 @@
+.video-gallery-page {
+  min-height: calc(100vh - 70px);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 3rem 0;
+}
+
+.video-gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+.gallery-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-title h1 {
+  color: #f8fafc;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.title-icon {
+  color: #3b82f6;
+}
+
+.gallery-subtitle {
+  color: #94a3b8;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.category-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.category-filter svg {
+  color: #64748b;
+}
+
+.category-btn {
+  padding: 0.5rem 1rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.category-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.category-btn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.gallery-footer {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .video-gallery-container {
+    padding: 0 1rem;
+  }
+
+  .gallery-title h1 {
+    font-size: 1.75rem;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-filter {
+    gap: 0.5rem;
+  }
+}

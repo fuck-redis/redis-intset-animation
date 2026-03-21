@@ -1,7 +1,9 @@
 .visualization-area {
   width: 100%;
   height: 100%;
-  min-height: 400px;
+  min-height: 360px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 .visualization-svg {
@@ -9,133 +11,126 @@
   height: 100%;
 }
 
-/* Text styles */
 .viz-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  fill: var(--text-primary);
+  font-size: 1.18rem;
+  font-weight: 700;
+  fill: #0f172a;
 }
 
 .viz-subtitle {
-  font-size: 0.875rem;
-  fill: var(--text-secondary);
+  font-size: 0.82rem;
+  fill: #475569;
+}
+
+.viz-comparison {
+  font-size: 0.78rem;
+  fill: #0f766e;
+  font-weight: 600;
 }
 
 .empty-message {
   font-size: 1rem;
-  fill: var(--text-tertiary);
-  font-style: italic;
+  fill: #94a3b8;
 }
 
-.block-value {
-  font-size: 1.125rem;
-  font-weight: 600;
-  fill: var(--text-primary);
+.memory-block .block-rect {
+  fill: #f8fafc;
+  stroke: #cbd5e1;
+  stroke-width: 2;
+  transition: all 0.25s ease;
 }
 
-.block-hex {
-  font-size: 0.75rem;
-  fill: var(--text-secondary);
-  font-family: 'Monaco', 'Menlo', monospace;
-}
-
-.block-index {
-  font-size: 0.75rem;
-  fill: var(--text-tertiary);
-  font-weight: 500;
-}
-
-.block-bytes {
-  font-size: 0.75rem;
-  fill: var(--text-tertiary);
-}
-
-.total-bytes {
-  font-size: 0.875rem;
-  fill: var(--text-secondary);
-  font-weight: 500;
-}
-
-/* Memory block styles */
-.memory-block {
-  transition: all 0.3s ease;
-}
-
-.memory-block:hover .block-rect {
-  stroke: var(--primary-color);
-  stroke-width: 3;
-}
-
-.block-rect.new {
-  animation: highlight 1s ease-out;
-}
-
-@keyframes highlight {
-  0%, 100% {
-    fill: #dcfce7;
-  }
-  50% {
-    fill: #86efac;
-  }
-}
-
-/* Animation states */
-.memory-block.searching .block-rect {
-  stroke: #3b82f6;
-  stroke-width: 3;
-  animation: pulse 0.6s ease-in-out;
-}
-
-.memory-block.found .block-rect {
+.memory-block.new .block-rect {
   fill: #dcfce7;
   stroke: #16a34a;
-  stroke-width: 3;
 }
 
-.memory-block.not-found .block-rect {
-  fill: #fef2f2;
-  stroke: #dc2626;
+.memory-block.searching .block-rect {
+  stroke: #0284c7;
   stroke-width: 3;
+  fill: #e0f2fe;
 }
 
 .memory-block.moving .block-rect {
-  animation: shake 0.4s ease-in-out;
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
+  stroke: #d97706;
+  fill: #ffedd5;
 }
 
 .memory-block.deleting .block-rect {
-  fill: #fef2f2;
   stroke: #dc2626;
-  animation: fadeOut 0.5s ease-out forwards;
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: scale(0.8);
-  }
+  fill: #fee2e2;
 }
 
 .memory-block.upgrading .block-rect {
-  animation: expand 0.8s ease-in-out;
+  stroke: #0369a1;
+  fill: #dbeafe;
 }
 
-@keyframes expand {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+.block-index {
+  font-size: 0.72rem;
+  fill: #64748b;
+}
+
+.block-value {
+  font-size: 1.08rem;
+  font-weight: 700;
+  fill: #0f172a;
+}
+
+.block-hex {
+  font-size: 0.71rem;
+  fill: #334155;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.block-bytes {
+  font-size: 0.7rem;
+  fill: #64748b;
+}
+
+.pointer-label {
+  font-size: 0.69rem;
+  font-weight: 700;
+}
+
+.flow-label {
+  font-size: 0.72rem;
+  fill: #0369a1;
+  font-weight: 600;
+}
+
+.total-bytes {
+  font-size: 0.82rem;
+  fill: #334155;
+  font-weight: 600;
+}
+
+.step-message {
+  font-size: 0.8rem;
+  fill: #0f766e;
+}
+
+
+.header-cell {
+  fill: #f1f5f9;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+}
+
+.header-cell-label {
+  font-size: 11px;
+  fill: #64748b;
+  text-transform: uppercase;
+}
+
+.header-cell-value {
+  font-size: 15px;
+  font-weight: 700;
+  fill: #0f172a;
+}
+
+.range-label {
+  font-size: 11px;
+  fill: #0369a1;
+  font-weight: 600;
 }

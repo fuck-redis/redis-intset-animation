@@ -1,0 +1,119 @@
+.playground-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 1rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+  z-index: 3;
+}
+
+.header-left {
+  justify-self: start;
+}
+
+.back-link {
+  color: #0369a1;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.header-center {
+  text-align: center;
+}
+
+.header-center h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.header-center p {
+  margin: 0.08rem 0 0;
+  font-size: 0.74rem;
+  color: #64748b;
+}
+
+.header-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.idea-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid #fde68a;
+  background: #fef9c3;
+  color: #854d0e;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid #bfdbfe;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.video-btn:hover {
+  background: #bfdbfe;
+}
+
+.github-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #0f172a;
+  text-decoration: none;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.star-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 960px) {
+  .playground-header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .header-left,
+  .header-right {
+    justify-self: center;
+  }
+}
