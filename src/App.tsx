@@ -31,9 +31,11 @@ import APIReference from './pages/SourceCodePage/chapters/APIReference';
 
 import './App.css';
 
+const BASENAME = import.meta.env.BASENAME || '';
+
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename={BASENAME}>
       <div className="app">
         <Navigation />
         <Routes>

@@ -2,9 +2,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+const BASENAME = isGithubActions ? '/redis-intset-animation' : '';
 
 export default defineConfig({
   base: isGithubActions ? '/redis-intset-animation/' : '/',
+  define: {
+    'import.meta.env.BASENAME': JSON.stringify(BASENAME),
+  },
   plugins: [react()],
   server: {
     port: 56954,
