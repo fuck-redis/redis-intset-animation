@@ -4,8 +4,8 @@ import { Play, X } from 'lucide-react';
 import './VideoEmbed.css';
 
 interface VideoEmbedProps {
-  component: React.FC<any>;
-  props: any;
+  component: React.FC<Record<string, unknown>>;
+  props: Record<string, unknown>;
   title: string;
   description?: string;
   aspectRatio?: '16:9' | '4:3';

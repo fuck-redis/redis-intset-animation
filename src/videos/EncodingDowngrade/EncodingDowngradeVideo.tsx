@@ -34,8 +34,8 @@ export const EncodingDowngradeVideo: React.FC<Props> = () => {
 
   // Current state based on phase
   let currentEncodingIndex = 0; // INT16
-  let bigValue = 50000;
-  let biggerValue = 2147483648; // INT32 max + 1
+  const bigValue = 50000;
+  const biggerValue = 2147483648; // INT32 max + 1
 
   if (frame >= phase2End) currentEncodingIndex = 1; // INT32 after first upgrade
   if (frame >= phase4End) currentEncodingIndex = 2; // INT64 after second upgrade

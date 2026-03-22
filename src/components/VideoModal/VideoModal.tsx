@@ -7,8 +7,8 @@ export interface VideoConfig {
   id: string;
   title: string;
   description: string;
-  component: React.FC<any>;
-  props: any;
+  component: React.FC<Record<string, unknown>>;
+  props: Record<string, unknown>;
 }
 
 interface VideoModalProps {

@@ -191,6 +191,7 @@ const BinarySearchVisual: React.FC = () => {
       setSearchStep((prev) => (prev + 1) % steps.length);
     }, 2000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const current = steps[searchStep];
@@ -208,7 +209,6 @@ const BinarySearchVisual: React.FC = () => {
       {/* 数据展示区域 */}
       <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', padding: '12px', background: '#f8fafc', borderRadius: '8px', marginBottom: '12px' }}>
         {data.map((value, i) => {
-          const isInRange = i >= current.left && i <= current.right;
           const isMid = i === current.mid;
           const isFound = current.found && i === current.mid;
           const isEliminated = i < current.left || i > current.right;

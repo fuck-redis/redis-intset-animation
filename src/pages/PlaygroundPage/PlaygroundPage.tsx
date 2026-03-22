@@ -631,7 +631,6 @@ const PlaygroundPage: React.FC = () => {
                       {currentStepData.array.map((val, idx) => {
                         const isHighlighted = currentStepData.highlight.includes(idx);
                         const colorClass = currentStepData.color || '';
-                        const isMoving = currentStepData.color === 'moving' && isHighlighted;
                         return (
                           <React.Fragment key={idx}>
                             <div
