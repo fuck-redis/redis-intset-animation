@@ -181,9 +181,9 @@ const BinarySearchVisual: React.FC = () => {
   const target = 42;
 
   const steps = [
-    { left: 0, right: 7, mid: 3, description: '第1步: 检查中间位置', action: '42 > 23，向右找' },
-    { left: 0, right: 2, mid: 1, description: '第2步: 缩小范围到 [0,2]', action: '42 > 15，向右找' },
-    { left: 2, right: 2, mid: 2, description: '第3步: 检查索引 2', action: '✓ 找到 42!' },
+    { left: 0, right: 7, mid: 3, found: false, description: '第1步: 检查中间位置', action: '42 > 23，向右找' },
+    { left: 0, right: 2, mid: 1, found: false, description: '第2步: 缩小范围到 [0,2]', action: '42 > 15，向右找' },
+    { left: 2, right: 2, mid: 2, found: true, description: '第3步: 检查索引 2', action: '✓ 找到 42!' },
   ];
 
   useEffect(() => {

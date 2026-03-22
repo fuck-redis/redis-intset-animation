@@ -7,8 +7,10 @@ export interface VideoConfig {
   id: string;
   title: string;
   description: string;
-  component: React.FC<Record<string, unknown>>;
-  props: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: React.FC<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: any;
 }
 
 interface VideoModalProps {
