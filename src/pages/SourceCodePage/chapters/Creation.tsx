@@ -1,5 +1,6 @@
 import React from 'react';
 import { FileCode } from 'lucide-react';
+import CodeBlock from '../../../components/CodeBlock/CodeBlock';
 import '../chapters/ChapterStyles.css';
 
 const Creation: React.FC = () => {
@@ -12,17 +13,16 @@ const Creation: React.FC = () => {
 
       <section className="chapter-section">
         <h2 className="section-title">intsetNew 函数</h2>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.c</span>
-          </div>
-          <pre><code>{`intset *intsetNew(void) {
+        <CodeBlock
+          code={`intset *intsetNew(void) {
     intset *is = zmalloc(sizeof(intset));
     is->encoding = intrev32ifbe(INTSET_ENC_INT16);
     is->length = 0;
     return is;
-}`}</code></pre>
-        </div>
+}`}
+          language="c"
+          title="intset.c"
+        />
 
         <div className="section-content">
           <p>创建新IntSet只需三步：</p>

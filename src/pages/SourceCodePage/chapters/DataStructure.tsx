@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Info, AlertTriangle } from 'lucide-react';
+import CodeBlock from '../../../components/CodeBlock/CodeBlock';
 import '../chapters/ChapterStyles.css';
 
 const DataStructure: React.FC = () => {
@@ -18,16 +19,15 @@ const DataStructure: React.FC = () => {
           <p>IntSet的结构体定义非常简洁，只有3个字段：</p>
         </div>
 
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.h</span>
-          </div>
-          <pre><code>{`typedef struct intset {
+        <CodeBlock
+          code={`typedef struct intset {
     uint32_t encoding;  /* 编码类型：INTSET_ENC_INT16/INT32/INT64 */
     uint32_t length;    /* 集合中的元素数量 */
     int8_t contents[];  /* 柔性数组成员，实际存储整数数据 */
-} intset;`}</code></pre>
-        </div>
+} intset;`}
+          language="c"
+          title="intset.h"
+        />
       </section>
 
       <section className="chapter-section">
@@ -41,14 +41,13 @@ const DataStructure: React.FC = () => {
           </p>
         </div>
 
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">编码常量定义</span>
-          </div>
-          <pre><code>{`#define INTSET_ENC_INT16 (sizeof(int16_t))  /* 值为 2 */
+        <CodeBlock
+          code={`#define INTSET_ENC_INT16 (sizeof(int16_t))  /* 值为 2 */
 #define INTSET_ENC_INT32 (sizeof(int32_t))  /* 值为 4 */
-#define INTSET_ENC_INT64 (sizeof(int64_t))  /* 值为 8 */`}</code></pre>
-        </div>
+#define INTSET_ENC_INT64 (sizeof(int64_t))  /* 值为 8 */`}
+          language="c"
+          title="编码常量定义"
+        />
 
         <div className="info-box">
           <h3 className="info-box-title">
@@ -120,11 +119,8 @@ const DataStructure: React.FC = () => {
         </div>
 
         <h3 className="section-subtitle">INT16编码示例</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">存储 [1, 3, 5] 的INT16 IntSet</span>
-          </div>
-          <pre><code>{`┌──────────────────────────────────────────────────────────┐
+        <CodeBlock
+          code={`┌──────────────────────────────────────────────────────────┐
 │ encoding: 2 (uint32_t, 4字节)                             │
 ├──────────────────────────────────────────────────────────┤
 │ length: 3 (uint32_t, 4字节)                               │
@@ -135,15 +131,14 @@ const DataStructure: React.FC = () => {
 ├──────────────────────────────────────────────────────────┤
 │ contents[2]: 5 (int16_t, 2字节)                          │
 └──────────────────────────────────────────────────────────┘
-总计: 8 (头部) + 6 (数据) = 14 字节`}</code></pre>
-        </div>
+总计: 8 (头部) + 6 (数据) = 14 字节`}
+          language="c"
+          title="存储 [1, 3, 5] 的INT16 IntSet"
+        />
 
         <h3 className="section-subtitle">INT32编码示例</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">存储 [1, 40000, 80000] 的INT32 IntSet</span>
-          </div>
-          <pre><code>{`┌──────────────────────────────────────────────────────────┐
+        <CodeBlock
+          code={`┌──────────────────────────────────────────────────────────┐
 │ encoding: 4 (uint32_t, 4字节)                             │
 ├──────────────────────────────────────────────────────────┤
 │ length: 3 (uint32_t, 4字节)                               │
@@ -154,15 +149,14 @@ const DataStructure: React.FC = () => {
 ├──────────────────────────────────────────────────────────┤
 │ contents[2]: 80000 (int32_t, 4字节)                      │
 └──────────────────────────────────────────────────────────┘
-总计: 8 (头部) + 12 (数据) = 20 字节`}</code></pre>
-        </div>
+总计: 8 (头部) + 12 (数据) = 20 字节`}
+          language="c"
+          title="存储 [1, 40000, 80000] 的INT32 IntSet"
+        />
 
         <h3 className="section-subtitle">INT64编码示例</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">存储 [1, 5000000000] 的INT64 IntSet</span>
-          </div>
-          <pre><code>{`┌──────────────────────────────────────────────────────────┐
+        <CodeBlock
+          code={`┌──────────────────────────────────────────────────────────┐
 │ encoding: 8 (uint32_t, 4字节)                             │
 ├──────────────────────────────────────────────────────────┤
 │ length: 2 (uint32_t, 4字节)                               │
@@ -171,8 +165,10 @@ const DataStructure: React.FC = () => {
 ├──────────────────────────────────────────────────────────┤
 │ contents[1]: 5000000000 (int64_t, 8字节)                 │
 └──────────────────────────────────────────────────────────┘
-总计: 8 (头部) + 16 (数据) = 24 字节`}</code></pre>
-        </div>
+总计: 8 (头部) + 16 (数据) = 24 字节`}
+          language="c"
+          title="存储 [1, 5000000000] 的INT64 IntSet"
+        />
       </section>
 
       <section className="chapter-section">
@@ -258,18 +254,17 @@ const DataStructure: React.FC = () => {
           <p>IntSet占用的总内存可以通过以下公式计算：</p>
         </div>
 
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">内存计算公式</span>
-          </div>
-          <pre><code>{`总内存 = sizeof(uint32_t) * 2 + encoding * length
+        <CodeBlock
+          code={`总内存 = sizeof(uint32_t) * 2 + encoding * length
        = 8 + encoding * length 字节
 
 其中：
 - sizeof(uint32_t) * 2 = 8 字节（encoding + length）
 - encoding: 2/4/8 字节
-- length: 元素数量`}</code></pre>
-        </div>
+- length: 元素数量`}
+          language="c"
+          title="内存计算公式"
+        />
 
         <div className="info-box">
           <h3 className="info-box-title">

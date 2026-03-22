@@ -1,12 +1,10 @@
 .chapter-content {
   background: white;
-  border-radius: 6px;
-  padding: 2.5rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  padding: 2rem 0;
 }
 
 .chapter-content h1 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 800;
   color: #1a202c;
   margin: 0 0 2rem 0;
@@ -15,21 +13,21 @@
 }
 
 .chapter-content h2 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #1a202c;
-  margin: 1.5rem 0 0.75rem 0;
+  margin: 2rem 0 1rem 0;
 }
 
 .chapter-content h3 {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: #1a202c;
   margin: 1.5rem 0 0.75rem 0;
 }
 
 .chapter-content section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .chapter-content p {
@@ -55,7 +53,6 @@
 .chapter-content code {
   background: #e2e8f0;
   padding: 0.125rem 0.375rem;
-  border-radius: 4px;
   font-family: 'Monaco', 'Menlo', monospace;
   font-size: 0.9em;
   color: #0ea5e9;
@@ -71,13 +68,11 @@
   border-collapse: collapse;
   margin: 1.5rem 0;
   background: white;
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .chapter-content th,
 .chapter-content td {
-  padding: 0.875rem 1rem;
+  padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid #e2e8f0;
 }
@@ -96,30 +91,42 @@
   background: #f8fafc;
 }
 
-/* Encoding cards */
+/* Info boxes - flattened */
+.info-box {
+  background: #f0f9ff;
+  border-left: 4px solid #0ea5e9;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.info-box h4 {
+  margin: 0 0 0.5rem 0;
+  color: #0ea5e9;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.info-box p {
+  margin: 0;
+}
+
+/* Encoding cards - flattened */
 .encoding-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
   margin: 1.5rem 0;
 }
 
 .encoding-card {
   background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 6px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s;
-}
-
-.encoding-card:hover {
-  border-color: #0ea5e9;
-  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.1);
+  padding: 1.25rem;
+  border-left: 4px solid #0ea5e9;
 }
 
 .encoding-card h3 {
   color: #0ea5e9;
-  font-size: 1.125rem;
+  font-size: 1rem;
   margin-top: 0;
 }
 
@@ -130,10 +137,29 @@
 
 .encoding-card li {
   font-size: 0.9rem;
-  margin: 0.5rem 0;
+  margin: 0.4rem 0;
 }
 
-/* FAQ */
+/* Comparison table */
+.comparison-table {
+  margin: 1.5rem 0;
+}
+
+.comparison-table thead {
+  background: #0ea5e9;
+  color: white;
+}
+
+.comparison-table th {
+  background: transparent;
+  color: white;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* FAQ - flattened */
 .faq-section {
   display: flex;
   flex-direction: column;
@@ -142,13 +168,12 @@
 
 .faq-item {
   background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 6px;
+  padding: 1.25rem;
   border-left: 4px solid #0ea5e9;
 }
 
 .faq-item h3 {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   color: #1a202c;
   margin: 0 0 0.75rem 0;
@@ -163,39 +188,190 @@
   margin: 0.75rem 0;
 }
 
-/* Performance table */
-.performance-table {
+/* Real-world example box */
+.example-box {
+  background: #fafafa;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem;
   margin: 1.5rem 0;
 }
 
-.performance-table thead {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  color: white;
+.example-box h4 {
+  margin: 0 0 1rem 0;
+  color: #1a202c;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.performance-table th {
-  background: transparent;
-  color: white;
+/* Memory visualization box */
+.memory-viz {
+  background: #1a202c;
+  color: #e2e8f0;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
 }
 
-.performance-table tbody tr:nth-child(even) {
-  background: #f8fafc;
+.memory-viz .label {
+  color: #0ea5e9;
+}
+
+.memory-viz .value {
+  color: #4ade80;
+}
+
+.memory-viz .comment {
+  color: #6b7280;
+}
+
+/* Step-by-step process */
+.process-steps {
+  counter-reset: step;
+  list-style: none;
+  padding-left: 0;
+}
+
+.process-steps li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.process-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: #0ea5e9;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Key points box */
+.key-points {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.key-points h4 {
+  margin: 0 0 0.75rem 0;
+  color: #0ea5e9;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Pro/Con comparison */
+.pro-con {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.pro-con-box {
+  padding: 1rem;
+}
+
+.pro-con-box.pro {
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+}
+
+.pro-con-box.con {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+}
+
+.pro-con-box h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pro-con-box.pro h4 {
+  color: #22c55e;
+}
+
+.pro-con-box.con h4 {
+  color: #ef4444;
+}
+
+.pro-con-box ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.pro-con-box li {
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
 }
 
 @media (max-width: 768px) {
   .chapter-content {
-    padding: 1.5rem;
+    padding: 1rem 0;
   }
-  
+
   .chapter-content h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
-  
+
   .chapter-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
-  
+
   .encoding-cards {
     grid-template-columns: 1fr;
   }
+
+  .pro-con {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Step-by-step process with sub-content */
+.chapter-content .process-steps li strong {
+  display: block;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.chapter-content .process-steps li p {
+  margin: 0.5rem 0;
+  color: #4a5568;
+}
+
+.chapter-content .process-steps li ul {
+  margin: 0.5rem 0 0 1.5rem;
+}
+
+/* Additional info box variations */
+.chapter-content .info-box ul {
+  margin: 0.5rem 0 0 1.5rem;
+  padding-left: 0;
+}
+
+.chapter-content .info-box li {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+/* Scenario boxes */
+.chapter-content .example-box code {
+  margin-top: 1rem;
+}
+
+.chapter-content .example-box > p {
+  color: #4a5568;
+  margin-bottom: 0.75rem;
 }

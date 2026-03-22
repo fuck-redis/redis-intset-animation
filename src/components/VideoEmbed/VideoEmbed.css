@@ -61,7 +61,7 @@
 .play-icon {
   width: 64px;
   height: 64px;
-  border-radius: 8px;
+  border-radius: 4px;
   background: rgba(59, 130, 246, 0.9);
   display: flex;
   align-items: center;

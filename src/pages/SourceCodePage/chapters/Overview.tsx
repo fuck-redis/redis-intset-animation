@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExternalLink, FileCode, FolderTree, BookOpen } from 'lucide-react';
+import CodeBlock from '../../../components/CodeBlock/CodeBlock';
 import '../chapters/ChapterStyles.css';
 
 const Overview: React.FC = () => {
@@ -182,18 +183,17 @@ const Overview: React.FC = () => {
             Redis需要在不同架构的机器上运行，IntSet使用一系列宏来处理大端/小端字节序问题：
           </p>
         </div>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">endianconv.h - 字节序转换宏</span>
-          </div>
-          <pre><code>{`#if (BYTE_ORDER == LITTLE_ENDIAN)
+        <CodeBlock
+          code={`#if (BYTE_ORDER == LITTLE_ENDIAN)
 #define intrev32ifbe(v) (v)
 #define intrev64ifbe(v) (v)
 #else
 #define intrev32ifbe(v) intrev32(v)
 #define intrev64ifbe(v) intrev64(v)
-#endif`}</code></pre>
-        </div>
+#endif`}
+          language="c"
+          title="endianconv.h - 字节序转换宏"
+        />
 
         <h3 className="section-subtitle">2. 内存分配策略</h3>
         <div className="section-content">

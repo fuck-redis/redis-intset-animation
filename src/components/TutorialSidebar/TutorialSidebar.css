@@ -38,6 +38,7 @@
   transition: all 0.2s;
   border-left: 3px solid transparent;
   position: relative;
+  font-size: 0.9rem;
 }
 
 .sidebar-link:hover {
@@ -60,7 +61,7 @@
   height: 24px;
   border-radius: 50%;
   background: #e2e8f0;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: #64748b;
   flex-shrink: 0;
@@ -77,9 +78,9 @@
   flex-shrink: 0;
 }
 
-.chapter-title {
+.sidebar-nav .chapter-title {
   flex: 1;
-  font-size: 0.8rem;
+  font-size: 0.9rem !important;
 }
 
 /* Scrollbar styling */
@@ -110,8 +111,8 @@
     padding: 0.75rem 1rem;
   }
   
-  .chapter-title {
-    font-size: 0.85rem;
+  .sidebar-nav .chapter-title {
+    font-size: 0.9rem !important;
   }
 }
 

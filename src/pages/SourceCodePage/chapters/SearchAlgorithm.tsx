@@ -1,5 +1,6 @@
 import React from 'react';
-import { Search, Zap, AlertCircle } from 'lucide-react';
+import { Search, Zap, AlertCircle, GitBranch } from 'lucide-react';
+import CodeBlock from '../../../components/CodeBlock/CodeBlock';
 import '../chapters/ChapterStyles.css';
 
 const SearchAlgorithm: React.FC = () => {
@@ -21,30 +22,27 @@ const SearchAlgorithm: React.FC = () => {
           </p>
         </div>
 
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.c - intsetSearch</span>
-          </div>
-          <pre><code>{`static uint8_t intsetSearch(intset *is, int64_t value, uint32_t *pos) {
+        <CodeBlock
+          code={`static uint8_t intsetSearch(intset *is, int64_t value, uint32_t *pos) {
     int min = 0, max = intrev32ifbe(is->length)-1, mid = -1;
     int64_t cur = -1;
 
-    /* 空集合的特殊处理 */
+    /* 1. 空集合检查 - 处理边界情况 */
     if (intrev32ifbe(is->length) == 0) {
         if (pos) *pos = 0;
         return 0;
-    } else {
-        /* 检查值是否超出范围 */
-        if (value > _intsetGet(is,max)) {
-            if (pos) *pos = intrev32ifbe(is->length);
-            return 0;
-        } else if (value < _intsetGet(is,0)) {
-            if (pos) *pos = 0;
-            return 0;
-        }
     }
 
-    /* 二分查找主循环 */
+    /* 2. 边界检查 - O(1) 快速判断，利用有序性 */
+    if (value > _intsetGet(is,max)) {
+        if (pos) *pos = intrev32ifbe(is->length);
+        return 0;
+    } else if (value < _intsetGet(is,0)) {
+        if (pos) *pos = 0;
+        return 0;
+    }
+
+    /* 3. 二分查找主循环 - 经典折半查找 */
     while(max >= min) {
         mid = ((unsigned int)min + (unsigned int)max) >> 1;
         cur = _intsetGet(is,mid);
@@ -57,52 +55,147 @@ const SearchAlgorithm: React.FC = () => {
         }
     }
 
+    /* 4. 返回结果 - 找到返回1，未找到返回插入位置 */
     if (value == cur) {
         if (pos) *pos = mid;
-        return 1;  /* 找到 */
+        return 1;  /* 找到目标 */
     } else {
         if (pos) *pos = min;
         return 0;  /* 未找到，pos指向应插入位置 */
     }
-}`}</code></pre>
+}`}
+          language="c"
+          title="intset.c - intsetSearch"
+        />
+
+        {/* 代码执行流程 */}
+        <div className="code-execution-flow">
+          <h3 className="execution-flow-title">
+            <GitBranch size={18} />
+            代码执行流程详解
+          </h3>
+
+          <div className="execution-step">
+            <span className="execution-step-number">1</span>
+            <div className="execution-step-content">
+              <h4 className="execution-step-title">初始化变量</h4>
+              <p className="execution-step-desc">
+                设置 min=0, max=length-1, mid=-1, cur=-1。max-1确保在空集合时max=-1。
+              </p>
+              <code className="execution-step-code">min=0, max=6, mid=? (假设有7个元素)</code>
+            </div>
+          </div>
+
+          <div className="execution-step">
+            <span className="execution-step-number">2</span>
+            <div className="execution-step-content">
+              <h4 className="execution-step-title">空集合快速返回</h4>
+              <p className="execution-step-desc">
+                如果length==0，直接返回0并将pos设为0。避免后续访问无效内存。
+              </p>
+              <code className="execution-step-code">if (length == 0) return 0;</code>
+            </div>
+          </div>
+
+          <div className="execution-step">
+            <span className="execution-step-number">3</span>
+            <div className="execution-step-content">
+              <h4 className="execution-step-title">边界值检查</h4>
+              <p className="execution-step-desc">
+                如果value &gt; max 或 value &lt; min，说明不在范围内，直接返回插入位置。
+                这是O(1)的优化，避免不必要的循环。
+              </p>
+              <code className="execution-step-code">if (value &gt; max) pos = length; // 插入末尾</code>
+            </div>
+          </div>
+
+          <div className="execution-step">
+            <span className="execution-step-number">4</span>
+            <div className="execution-step-content">
+              <h4 className="execution-step-title">二分查找循环</h4>
+              <p className="execution-step-desc">
+                使用位运算计算中点，比除法快。比较value与cur，调整搜索范围。
+              </p>
+              <code className="execution-step-code">mid = (min + max) &gt;&gt; 1; cur = contents[mid];</code>
+            </div>
+          </div>
+
+          <div className="execution-step">
+            <span className="execution-step-number">5</span>
+            <div className="execution-step-content">
+              <h4 className="execution-step-title">返回结果</h4>
+              <p className="execution-step-desc">
+                找到返回1和位置，未找到返回0和插入位置(保持有序)。
+              </p>
+              <code className="execution-step-code">return found ? 1 : 0;</code>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="chapter-section">
-        <h2 className="section-title">算法流程分析</h2>
+        <h2 className="section-title">算法流程图</h2>
+        <div className="flow-diagram">
+          <div className="flow-step">初始化变量</div>
+          <span className="flow-arrow">-&gt;</span>
+          <div className="flow-step">空集合检查</div>
+          <span className="flow-arrow">-&gt;</span>
+          <div className="flow-step">边界快速判断</div>
+          <span className="flow-arrow">-&gt;</span>
+          <div className="flow-step">二分循环</div>
+          <span className="flow-arrow">-&gt;</span>
+          <div className="flow-step">返回结果</div>
+        </div>
+      </section>
 
-        <ol className="steps-list">
-          <li className="step-item">
-            <h4 className="step-title">空集合检查</h4>
-            <p className="step-description">
-              首先检查IntSet是否为空。如果为空，直接返回0（未找到），并将插入位置设为0。
-            </p>
-          </li>
+      <section className="chapter-section">
+        <h2 className="section-title">变量追踪示例</h2>
+        <div className="section-content">
+          <p>以在 <code>[1, 15, 23, 42, 56, 78, 89]</code> 中查找 42 为例：</p>
+        </div>
 
-          <li className="step-item">
-            <h4 className="step-title">边界值快速判断</h4>
-            <p className="step-description">
-              检查待查找值是否超出当前范围。如果大于最大值或小于最小值，
-              直接返回失败并给出正确的插入位置（末尾或开头）。这个优化避免了不必要的二分查找。
-            </p>
-          </li>
+        <div className="variable-tracker">
+          <h4 className="variable-tracker-title">查找过程变量变化</h4>
+          <div className="variable-item">
+            <span className="variable-name">初始</span>
+            <span className="variable-value">min=0, max=6, mid=?</span>
+            <span className="variable-desc">7个元素，索引0-6</span>
+          </div>
+          <div className="variable-item">
+            <span className="variable-name">第1轮</span>
+            <span className="variable-value">mid=3, cur=42</span>
+            <span className="variable-desc">(0+6)&gt;&gt;1=3, contents[3]=42</span>
+          </div>
+          <div className="variable-item">
+            <span className="variable-name">比较</span>
+            <span className="variable-value">42 == 42</span>
+            <span className="variable-desc">找到！返回1，pos=3</span>
+          </div>
+        </div>
 
-          <li className="step-item">
-            <h4 className="step-title">二分查找循环</h4>
-            <p className="step-description">
-              使用经典的二分查找算法。每次取中间位置，比较目标值与中间值的大小，
-              缩小查找范围直到找到目标或范围为空。
-            </p>
-          </li>
-
-          <li className="step-item">
-            <h4 className="step-title">返回结果</h4>
-            <p className="step-description">
-              如果找到，返回1并设置pos为元素位置；
-              如果未找到，返回0并设置pos为应该插入的位置（保持有序）。
-            </p>
-          </li>
-        </ol>
+        <div className="variable-tracker">
+          <h4 className="variable-tracker-title">查找35（不存在）</h4>
+          <div className="variable-item">
+            <span className="variable-name">第1轮</span>
+            <span className="variable-value">mid=3, cur=42</span>
+            <span className="variable-desc">35 &lt; 42，调整max</span>
+          </div>
+          <div className="variable-item">
+            <span className="variable-name">第2轮</span>
+            <span className="variable-value">mid=1, cur=15</span>
+            <span className="variable-desc">35 &gt; 15，调整min</span>
+          </div>
+          <div className="variable-item">
+            <span className="variable-name">第3轮</span>
+            <span className="variable-value">mid=2, cur=23</span>
+            <span className="variable-desc">35 &gt; 23，调整min</span>
+          </div>
+          <div className="variable-item">
+            <span className="variable-name">结果</span>
+            <span className="variable-value">min=3, max=1</span>
+            <span className="variable-desc">min &gt; max，退出循环，返回0，pos=3</span>
+          </div>
+        </div>
       </section>
 
       <section className="chapter-section">
@@ -111,7 +204,7 @@ const SearchAlgorithm: React.FC = () => {
         <div className="card-grid">
           <div className="feature-card">
             <h3 className="feature-card-title">
-              <Zap size={20} />
+              <Zap size={18} />
               1. 位运算计算中点
             </h3>
             <p className="feature-card-content">
@@ -122,7 +215,7 @@ const SearchAlgorithm: React.FC = () => {
 
           <div className="feature-card">
             <h3 className="feature-card-title">
-              <Zap size={20} />
+              <Zap size={18} />
               2. 边界检查提前返回
             </h3>
             <p className="feature-card-content">
@@ -133,7 +226,7 @@ const SearchAlgorithm: React.FC = () => {
 
           <div className="feature-card">
             <h3 className="feature-card-title">
-              <Zap size={20} />
+              <Zap size={18} />
               3. 复用查找结果
             </h3>
             <p className="feature-card-content">
@@ -144,7 +237,7 @@ const SearchAlgorithm: React.FC = () => {
 
           <div className="feature-card">
             <h3 className="feature-card-title">
-              <Zap size={20} />
+              <Zap size={18} />
               4. 指针参数传递
             </h3>
             <p className="feature-card-content">
@@ -174,7 +267,7 @@ const SearchAlgorithm: React.FC = () => {
 
         <div className="info-box">
           <h3 className="info-box-title">
-            <Search size={20} />
+            <Search size={18} />
             实际性能表现
           </h3>
           <div className="info-box-content">
@@ -194,12 +287,11 @@ const SearchAlgorithm: React.FC = () => {
         <h2 className="section-title">代码细节解读</h2>
 
         <h3 className="section-subtitle">为什么使用 unsigned int 转换？</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">防止整数溢出</span>
-          </div>
-          <pre><code>{`mid = ((unsigned int)min + (unsigned int)max) >> 1;`}</code></pre>
-        </div>
+        <CodeBlock
+          code={`mid = ((unsigned int)min + (unsigned int)max) >> 1;`}
+          language="c"
+          title="防止整数溢出"
+        />
         <div className="section-content">
           <p>
             在计算中点时，如果min和max都很大（接近INT_MAX），直接相加可能导致有符号整数溢出。
@@ -273,7 +365,7 @@ const SearchAlgorithm: React.FC = () => {
 
       <div className="warning-box">
         <h3 className="warning-box-title">
-          <AlertCircle size={20} />
+          <AlertCircle size={18} />
           常见误区
         </h3>
         <div className="warning-box-content">

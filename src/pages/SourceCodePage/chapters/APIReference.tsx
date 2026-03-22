@@ -1,5 +1,6 @@
 import React from 'react';
 import { BookMarked, ExternalLink } from 'lucide-react';
+import CodeBlock from '../../../components/CodeBlock/CodeBlock';
 import '../chapters/ChapterStyles.css';
 
 const APIReference: React.FC = () => {
@@ -69,67 +70,60 @@ const APIReference: React.FC = () => {
         <h2 className="section-title">函数详解</h2>
 
         <h3 className="section-subtitle">intsetFind - 查找元素</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.c</span>
-          </div>
-          <pre><code>{`uint8_t intsetFind(intset *is, int64_t value) {
+        <CodeBlock
+          code={`uint8_t intsetFind(intset *is, int64_t value) {
     uint8_t valenc = _intsetValueEncoding(value);
-    return valenc <= intrev32ifbe(is->encoding) && 
+    return valenc <= intrev32ifbe(is->encoding) &&
            intsetSearch(is,value,NULL);
-}`}</code></pre>
-        </div>
+}`}
+          language="c"
+          title="intset.c"
+        />
         <div className="section-content">
           <p>返回1表示找到，0表示未找到。先检查编码避免不必要的查找。</p>
         </div>
 
         <h3 className="section-subtitle">intsetGet - 获取指定位置元素</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.c</span>
-          </div>
-          <pre><code>{`uint8_t intsetGet(intset *is, uint32_t pos, int64_t *value) {
+        <CodeBlock
+          code={`uint8_t intsetGet(intset *is, uint32_t pos, int64_t *value) {
     if (pos < intrev32ifbe(is->length)) {
         *value = _intsetGet(is,pos);
         return 1;
     }
     return 0;
-}`}</code></pre>
-        </div>
+}`}
+          language="c"
+          title="intset.c"
+        />
         <div className="section-content">
           <p>按索引获取元素，pos从0开始。成功返回1，越界返回0。</p>
         </div>
 
         <h3 className="section-subtitle">intsetLen - 获取长度</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.c</span>
-          </div>
-          <pre><code>{`uint32_t intsetLen(const intset *is) {
+        <CodeBlock
+          code={`uint32_t intsetLen(const intset *is) {
     return intrev32ifbe(is->length);
-}`}</code></pre>
-        </div>
+}`}
+          language="c"
+          title="intset.c"
+        />
 
         <h3 className="section-subtitle">intsetBlobLen - 获取内存占用</h3>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">intset.c</span>
-          </div>
-          <pre><code>{`size_t intsetBlobLen(intset *is) {
-    return sizeof(intset) + 
-           (size_t)intrev32ifbe(is->length) * 
+        <CodeBlock
+          code={`size_t intsetBlobLen(intset *is) {
+    return sizeof(intset) +
+           (size_t)intrev32ifbe(is->length) *
            intrev32ifbe(is->encoding);
-}`}</code></pre>
-        </div>
+}`}
+          language="c"
+          title="intset.c"
+        />
       </section>
 
       <section className="chapter-section">
         <h2 className="section-title">使用示例</h2>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">示例代码</span>
-          </div>
-          <pre><code>{`// 创建IntSet
+        <CodeBlock
+          code={`// 创建IntSet
 intset *is = intsetNew();
 
 // 添加元素
@@ -157,8 +151,10 @@ int removed;
 is = intsetRemove(is, 3, &removed);
 
 // 释放内存
-zfree(is);`}</code></pre>
-        </div>
+zfree(is);`}
+          language="c"
+          title="示例代码"
+        />
       </section>
 
       <section className="chapter-section">

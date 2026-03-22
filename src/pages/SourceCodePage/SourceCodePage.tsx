@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
+import CodeBlock from '../../components/CodeBlock/CodeBlock';
 import './SourceCodePage.css';
 
 const SourceCodePage: React.FC = () => {
@@ -24,9 +25,9 @@ const SourceCodePage: React.FC = () => {
             <div className="code-file">
               <div className="file-header">
                 <span className="file-name">intset.h - 结构定义</span>
-                <a 
-                  href="https://github.com/redis/redis/blob/unstable/src/intset.h" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/redis/redis/blob/unstable/src/intset.h"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="github-link"
                 >
@@ -34,16 +35,20 @@ const SourceCodePage: React.FC = () => {
                   在GitHub查看
                 </a>
               </div>
-              <pre><code>{`typedef struct intset {
+              <CodeBlock
+                code={`typedef struct intset {
     uint32_t encoding;  // 编码类型
-    uint32_t length;    // 元素数量  
+    uint32_t length;    // 元素数量
     int8_t contents[];  // 柔性数组成员
 } intset;
 
 /* 编码常量定义 */
 #define INTSET_ENC_INT16 (sizeof(int16_t))  // 2
 #define INTSET_ENC_INT32 (sizeof(int32_t))  // 4
-#define INTSET_ENC_INT64 (sizeof(int64_t))  // 8`}</code></pre>
+#define INTSET_ENC_INT64 (sizeof(int64_t))  // 8`}
+                language="c"
+                title="intset.h"
+              />
             </div>
 
             <div className="explanation-box">
@@ -71,12 +76,16 @@ const SourceCodePage: React.FC = () => {
               <div className="file-header">
                 <span className="file-name">intset.c - intsetNew</span>
               </div>
-              <pre><code>{`intset *intsetNew(void) {
+              <CodeBlock
+                code={`intset *intsetNew(void) {
     intset *is = zmalloc(sizeof(intset));
     is->encoding = intrev32ifbe(INTSET_ENC_INT16);
     is->length = 0;
     return is;
-}`}</code></pre>
+}`}
+                language="c"
+                title="intsetNew 函数"
+              />
             </div>
             <p>
               新创建的IntSet默认使用INT16编码，这是最节省内存的选择。
@@ -88,7 +97,8 @@ const SourceCodePage: React.FC = () => {
               <div className="file-header">
                 <span className="file-name">intset.c - _intsetGet</span>
               </div>
-              <pre><code>{`static int64_t _intsetGet(intset *is, int pos) {
+              <CodeBlock
+                code={`static int64_t _intsetGet(intset *is, int pos) {
     return _intsetGetEncoded(is, pos, intrev32ifbe(is->encoding));
 }
 
@@ -110,7 +120,10 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
         memrev16ifbe(&v16);
         return v16;
     }
-}`}</code></pre>
+}`}
+                language="c"
+                title="_intsetGet 函数"
+              />
             </div>
             <p>
               根据不同的编码类型，将contents数组转换为相应的指针类型，然后读取对应位置的值。
@@ -122,7 +135,8 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
               <div className="file-header">
                 <span className="file-name">intset.c - intsetSearch</span>
               </div>
-              <pre><code>{`static uint8_t intsetSearch(intset *is, int64_t value, uint32_t *pos) {
+              <CodeBlock
+                code={`static uint8_t intsetSearch(intset *is, int64_t value, uint32_t *pos) {
     int min = 0, max = intrev32ifbe(is->length)-1, mid = -1;
     int64_t cur = -1;
 
@@ -161,7 +175,10 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
         if (pos) *pos = min;
         return 0;  /* 未找到，pos指向应插入位置 */
     }
-}`}</code></pre>
+}`}
+                language="c"
+                title="intsetSearch 函数"
+              />
             </div>
             <div className="explanation-box">
               <h3>算法亮点</h3>
@@ -178,7 +195,8 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
               <div className="file-header">
                 <span className="file-name">intset.c - intsetAdd</span>
               </div>
-              <pre><code>{`intset *intsetAdd(intset *is, int64_t value, uint8_t *success) {
+              <CodeBlock
+                code={`intset *intsetAdd(intset *is, int64_t value, uint8_t *success) {
     uint8_t valenc = _intsetValueEncoding(value);
     uint32_t pos;
     if (success) *success = 1;
@@ -195,7 +213,7 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
 
         /* 扩展内存 */
         is = intsetResize(is,intrev32ifbe(is->length)+1);
-        
+
         /* 移动元素 */
         if (pos < intrev32ifbe(is->length))
             intsetMoveTail(is,pos,pos+1);
@@ -205,7 +223,10 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
     _intsetSet(is,pos,value);
     is->length = intrev32ifbe(intrev32ifbe(is->length)+1);
     return is;
-}`}</code></pre>
+}`}
+                language="c"
+                title="intsetAdd 函数"
+              />
             </div>
 
             <h3>5. 编码升级</h3>
@@ -213,11 +234,12 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
               <div className="file-header">
                 <span className="file-name">intset.c - intsetUpgradeAndAdd</span>
               </div>
-              <pre><code>{`static intset *intsetUpgradeAndAdd(intset *is, int64_t value) {
+              <CodeBlock
+                code={`static intset *intsetUpgradeAndAdd(intset *is, int64_t value) {
     uint8_t curenc = intrev32ifbe(is->encoding);
     uint8_t newenc = _intsetValueEncoding(value);
     int length = intrev32ifbe(is->length);
-    
+
     /* 新值要么最大要么最小 */
     int prepend = value < 0 ? 1 : 0;
 
@@ -234,10 +256,13 @@ static int64_t _intsetGetEncoded(intset *is, int pos, uint8_t enc) {
         _intsetSet(is,0,value);
     else
         _intsetSet(is,intrev32ifbe(is->length),value);
-        
+
     is->length = intrev32ifbe(intrev32ifbe(is->length)+1);
     return is;
-}`}</code></pre>
+}`}
+                language="c"
+                title="intsetUpgradeAndAdd 函数"
+              />
             </div>
             <div className="explanation-box">
               <h3>升级优化</h3>

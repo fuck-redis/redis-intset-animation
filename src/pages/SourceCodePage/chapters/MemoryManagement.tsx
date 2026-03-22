@@ -1,5 +1,6 @@
 import React from 'react';
 import { Database } from 'lucide-react';
+import CodeBlock from '../../../components/CodeBlock/CodeBlock';
 import '../chapters/ChapterStyles.css';
 
 const MemoryManagement: React.FC = () => {
@@ -12,17 +13,16 @@ const MemoryManagement: React.FC = () => {
 
       <section className="chapter-section">
         <h2 className="section-title">内存计算公式</h2>
-        <div className="code-block">
-          <div className="code-header">
-            <span className="code-filename">内存占用计算</span>
-          </div>
-          <pre><code>{`总内存 = 8 + encoding × length 字节
+        <CodeBlock
+          code={`总内存 = 8 + encoding × length 字节
 
 示例：
 - 100个INT16: 8 + 2 × 100 = 208 字节
 - 100个INT32: 8 + 4 × 100 = 408 字节
-- 100个INT64: 8 + 8 × 100 = 808 字节`}</code></pre>
-        </div>
+- 100个INT64: 8 + 8 × 100 = 808 字节`}
+          language="c"
+          title="内存占用计算"
+        />
       </section>
 
       <section className="chapter-section">

@@ -76,7 +76,7 @@
   height: 24px;
   background: rgba(59, 130, 246, 0.2);
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -94,7 +94,7 @@
 
 .chapter-title {
   flex: 1;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 @media (max-width: 1024px) {

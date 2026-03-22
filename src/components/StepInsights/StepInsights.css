@@ -1,11 +1,10 @@
 .step-insights {
   background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.4rem;
 }
 
 .step-insights-header {
@@ -16,66 +15,72 @@
 
 .step-insights-header h3 {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: var(--text-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .step-badge {
-  font-size: 0.7rem;
-  background: #e2e8f0;
-  color: #0f172a;
-  padding: 0.15rem 0.4rem;
-  border-radius: 4px;
+  font-size: 0.62rem;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 0.1rem 0.3rem;
+  font-weight: 600;
 }
 
 .step-row {
   display: grid;
-  grid-template-columns: 82px 1fr;
-  gap: 0.6rem;
+  grid-template-columns: 70px 1fr;
+  gap: 0.5rem;
   align-items: start;
 }
 
 .step-row .label {
   color: var(--text-secondary);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
 }
 
 .step-row .value {
   color: var(--text-primary);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
 }
 
 .step-row .value.mono {
   font-family: 'Monaco', 'Menlo', monospace;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
 }
 
 .step-vars .label {
   color: var(--text-secondary);
-  font-size: 0.78rem;
-  margin-bottom: 0.2rem;
+  font-size: 0.72rem;
+  margin-bottom: 0.15rem;
 }
 
 .step-vars ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid #dbeafe;
-  border-radius: 4px;
-  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
 }
 
 .step-vars li {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.4rem;
-  padding: 0.3rem 0.5rem;
-  font-size: 0.75rem;
-  background: #eff6ff;
+  gap: 0.3rem;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.step-vars li:last-child {
+  border-bottom: none;
 }
 
 .step-vars li:nth-child(even) {
-  background: #dbeafe;
+  background: #f1f5f9;
 }
 
 .mono {
@@ -84,21 +89,20 @@
 
 
 .export-btn {
-  margin-top: 0.15rem;
+  margin-top: 0.1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  gap: 0.25rem;
   width: 100%;
-  border: 1px solid #bfdbfe;
-  background: #eff6ff;
-  color: #0c4a6e;
-  border-radius: 4px;
-  font-size: 0.74rem;
-  padding: 0.3rem 0.5rem;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.4rem;
   cursor: pointer;
 }
 
 .export-btn:hover {
-  background: #dbeafe;
+  background: #f1f5f9;
 }

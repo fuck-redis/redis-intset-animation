@@ -2,8 +2,7 @@
   width: 100%;
   height: 100%;
   min-height: 360px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: #ffffff;
 }
 
 .visualization-svg {
@@ -12,18 +11,18 @@
 }
 
 .viz-title {
-  font-size: 1.18rem;
+  font-size: 1.1rem;
   font-weight: 700;
   fill: #0f172a;
 }
 
 .viz-subtitle {
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   fill: #475569;
 }
 
 .viz-comparison {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   fill: #0f766e;
   font-weight: 600;
 }
@@ -35,9 +34,9 @@
 
 .memory-block .block-rect {
   fill: #f8fafc;
-  stroke: #cbd5e1;
-  stroke-width: 2;
-  transition: all 0.25s ease;
+  stroke: #e2e8f0;
+  stroke-width: 1;
+  transition: all 0.2s ease;
 }
 
 .memory-block.new .block-rect {
@@ -46,9 +45,9 @@
 }
 
 .memory-block.searching .block-rect {
-  stroke: #0284c7;
-  stroke-width: 3;
-  fill: #e0f2fe;
+  stroke: #0f172a;
+  stroke-width: 2;
+  fill: #f1f5f9;
 }
 
 .memory-block.moving .block-rect {
@@ -67,70 +66,71 @@
 }
 
 .block-index {
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   fill: #64748b;
 }
 
 .block-value {
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 700;
   fill: #0f172a;
 }
 
 .block-hex {
-  font-size: 0.71rem;
-  fill: #334155;
+  font-size: 0.65rem;
+  fill: #475569;
   font-family: 'Monaco', 'Menlo', monospace;
 }
 
 .block-bytes {
-  font-size: 0.7rem;
-  fill: #64748b;
+  font-size: 0.62rem;
+  fill: #94a3b8;
 }
 
 .pointer-label {
-  font-size: 0.69rem;
+  font-size: 0.62rem;
   font-weight: 700;
 }
 
 .flow-label {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   fill: #0369a1;
   font-weight: 600;
 }
 
 .total-bytes {
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   fill: #334155;
   font-weight: 600;
 }
 
 .step-message {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   fill: #0f766e;
+  font-weight: 600;
 }
 
 
 .header-cell {
-  fill: #f1f5f9;
-  stroke: #cbd5e1;
-  stroke-width: 1.5;
+  fill: #f8fafc;
+  stroke: #e2e8f0;
+  stroke-width: 1;
 }
 
 .header-cell-label {
-  font-size: 11px;
+  font-size: 10px;
   fill: #64748b;
   text-transform: uppercase;
 }
 
 .header-cell-value {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   fill: #0f172a;
 }
 
 .range-label {
-  font-size: 11px;
+  font-size: 10px;
   fill: #0369a1;
   font-weight: 600;
 }
